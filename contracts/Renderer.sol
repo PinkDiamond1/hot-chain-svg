@@ -76,8 +76,8 @@ contract Renderer {
                     generateSVGDefs(params),
                     generateSVGBorderText(params.bordertext),
                     generateSVGCardMantle(params.title, params.subtitle),
-                    generageSvgCurve(),
-                    generateSVGPositionDataAndLocationCurve(
+                    generateMiddleImage(),
+                    generateSVGLeftData(
                         params.attribute1,
                         params.attribute2,
                         params.attribute3
@@ -217,7 +217,7 @@ contract Renderer {
         );
     }
 
-    function generageSvgCurve() private pure returns (string memory svg) {
+    function generateMiddleImage() private pure returns (string memory svg) {
         string memory fade = '#none';
 
         string memory curve = 'M1 1C41 41 105 105 145 145';
@@ -246,7 +246,7 @@ contract Renderer {
         svg = renderSword();
     }
 
-    function generateSVGPositionDataAndLocationCurve(
+    function generateSVGLeftData(
         string memory attribute1,
         string memory attribute2,
         string memory attribute3
