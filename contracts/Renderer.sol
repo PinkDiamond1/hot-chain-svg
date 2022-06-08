@@ -284,7 +284,7 @@ contract Renderer {
                 '<g style="transform:translate(226px, 433px)">',
                 '<rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
                 '<text x="7px" y="21px" font-family="\'Verdana\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)"> </tspan>',
-                '123',
+                '15k',
                 '</text>',
                 // here goes bottom left image
                 '</g>'
