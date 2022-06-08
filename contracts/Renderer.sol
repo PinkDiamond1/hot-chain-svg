@@ -20,16 +20,6 @@ contract Renderer {
     string constant curve8 = 'M1 1C1 97 49 145 145 145';
 
     struct SVGParams {
-        string quoteToken;
-        string baseToken;
-        address poolAddress;
-        string quoteTokenSymbol;
-        string baseTokenSymbol;
-        string feeTier;
-        int24 tickLower;
-        int24 tickUpper;
-        int24 tickSpacing;
-        int8 overRange;
         uint256 tokenId;
         string color0;
         string color1;
@@ -52,9 +42,9 @@ contract Renderer {
     function render(uint256 _tokenId) public pure returns (string memory) {
         uint256 team = 0;
         string memory color1 = 'CC5500';
-        string memory color2 = '448844';
-        string memory color3 = '448844';
-        string memory color4 = '448844';
+        string memory color2 = 'CC5500';
+        string memory color3 = 'CC5500';
+        string memory color4 = 'CC5500';
         if (team == 0) {
 color1 = "0096FF";
         }
@@ -63,16 +53,6 @@ color1 = "0096FF";
         return
             generateSVG(
                 SVGParams(
-                    'QUOTE',
-                    'ETH',
-                    0x656c66F1C4be734Bd14163Bbe001d379121478ca,
-                    'ETH',
-                    'ETH',
-                    'hllle',
-                    1,
-                    1,
-                    1,
-                    1,
                     1,
                     color1,
                     color2,
@@ -117,17 +97,17 @@ color1 = "0096FF";
                         params.subtitle
                     ),
                     generageSvgCurve(
-                        params.tickLower,
-                        params.tickUpper,
-                        params.tickSpacing,
-                        params.overRange
+                        1,
+                       2,
+                        1,
+                        2
                     ),
                     generateSVGPositionDataAndLocationCurve(
                         params.attribute1,
                         params.attribute2,
                         params.attribute3
                     ),
-                    generateSVGRareSparkle(params.tokenId, params.poolAddress),
+                    generateSVGRareSparkle(params.tokenId),
                     '</svg>'
                 )
             );
@@ -440,12 +420,12 @@ color1 = "0096FF";
         }
     }
 
-    function generateSVGRareSparkle(uint256 tokenId, address poolAddress)
+    function generateSVGRareSparkle(uint256 tokenId)
         private
         pure
         returns (string memory svg)
     {
-        if (isRare(tokenId, poolAddress)) {
+        if (tokenId % 100 == 0) {
             svg = string(
                 abi.encodePacked(
                     '<g style="transform:translate(226px, 392px)"><rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
@@ -460,14 +440,7 @@ color1 = "0096FF";
         }
     }
 
-    function isRare(uint256 tokenId, address poolAddress)
-        internal
-        pure
-        returns (bool)
-    {
-        bytes32 h = keccak256(abi.encodePacked(tokenId, poolAddress));
-        return uint256(h) < type(uint256).max / (tokenId * 2);
-    }
+    
 
     function example() external pure returns (string memory) {
         return render(1);
