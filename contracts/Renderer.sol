@@ -10,15 +10,6 @@ import './Utils.sol';
 contract Renderer {
     using Strings for uint256;
 
-    string constant curve1 = 'M1 1C41 41 105 105 145 145';
-    string constant curve2 = 'M1 1C33 49 97 113 145 145';
-    string constant curve3 = 'M1 1C33 57 89 113 145 145';
-    string constant curve4 = 'M1 1C25 65 81 121 145 145';
-    string constant curve5 = 'M1 1C17 73 73 129 145 145';
-    string constant curve6 = 'M1 1C9 81 65 137 145 145';
-    string constant curve7 = 'M1 1C1 89 57.5 145 145 145';
-    string constant curve8 = 'M1 1C1 97 49 145 145 145';
-
     struct SVGParams {
         uint256 tokenId;
         string color0;
@@ -47,6 +38,8 @@ contract Renderer {
         string memory color4 = 'CC5500';
         if (team == 0) {
             color1 = '0096FF';
+        } else {
+            color1 = 'CC5500';
         }
 
         return
@@ -96,7 +89,6 @@ contract Renderer {
                         params.attribute2,
                         params.attribute3
                     ),
-                    generateSVGRareSparkle(params.tokenId),
                     '</svg>'
                 )
             );
@@ -241,7 +233,8 @@ contract Renderer {
         string memory fade = overRange == 1 ? '#fade-up' : overRange == -1
             ? '#fade-down'
             : '#none';
-        string memory curve = getCurve(tickLower, tickUpper, tickSpacing);
+        string memory curve = 'M1 1C41 41 105 105 145 145';
+
         svg = string(
             abi.encodePacked(
                 '<g mask="url(',
@@ -263,31 +256,6 @@ contract Renderer {
                 generateSVGCurveCircle(overRange)
             )
         );
-    }
-
-    function getCurve(
-        int24 tickLower,
-        int24 tickUpper,
-        int24 tickSpacing
-    ) internal pure returns (string memory curve) {
-        int24 tickRange = (tickUpper - tickLower) / tickSpacing;
-        if (tickRange <= 4) {
-            curve = curve1;
-        } else if (tickRange <= 8) {
-            curve = curve2;
-        } else if (tickRange <= 16) {
-            curve = curve3;
-        } else if (tickRange <= 32) {
-            curve = curve4;
-        } else if (tickRange <= 64) {
-            curve = curve5;
-        } else if (tickRange <= 128) {
-            curve = curve6;
-        } else if (tickRange <= 256) {
-            curve = curve7;
-        } else {
-            curve = curve8;
-        }
     }
 
     function generateSVGCurveCircle(int8 overRange)
@@ -366,6 +334,7 @@ contract Renderer {
                 '<g style="transform:translate(226px, 433px)">',
                 '<rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
                 '<path stroke-linecap="round" d="M8 9C8.00004 22.9494 16.2099 28 27 28" fill="none" stroke="white" />',
+                // here goes bottom left image
                 '<circle style="transform:translate3d(',
                 xCoord,
                 'px, ',
@@ -405,26 +374,6 @@ contract Renderer {
             return ('21', '27');
         } else {
             return ('24', '27');
-        }
-    }
-
-    function generateSVGRareSparkle(uint256 tokenId)
-        private
-        pure
-        returns (string memory svg)
-    {
-        if (tokenId % 100 == 0) {
-            svg = string(
-                abi.encodePacked(
-                    '<g style="transform:translate(226px, 392px)"><rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
-                    '<g><path style="transform:translate(6px,6px)" d="M12 0L12.6522 9.56587L18 1.6077L13.7819 10.2181L22.3923 6L14.4341 ',
-                    '11.3478L24 12L14.4341 12.6522L22.3923 18L13.7819 13.7819L18 22.3923L12.6522 14.4341L12 24L11.3478 14.4341L6 22.39',
-                    '23L10.2181 13.7819L1.6077 18L9.56587 12.6522L0 12L9.56587 11.3478L1.6077 6L10.2181 10.2181L6 1.6077L11.3478 9.56587L12 0Z" fill="white" />',
-                    '<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="10s" repeatCount="indefinite"/></g></g>'
-                )
-            );
-        } else {
-            svg = '';
         }
     }
 
