@@ -49,12 +49,12 @@ contract Renderer {
                     color2,
                     color3,
                     color4,
-                    'XP: 0',
-                    'ENEAS',
-                    'Mystery',
-                    _tokenId.toString(),
-                    'Paper Hand',
-                    '0'
+                    'XP: 0', //border text
+                    'ENEAS', //title
+                    'Mystery', //subtitle
+                    _tokenId.toString(), //attr1
+                    'Paper Hand', //attr 2
+                    '0' //attr3
                 )
             );
     }
