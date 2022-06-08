@@ -252,51 +252,9 @@ contract Renderer {
                 '<rect x="-16px" y="-16px" width="180px" height="180px" fill="none" />',
                 '<path d="',
                 curve,
-                '" stroke="rgba(255,255,255,1)" fill="none" stroke-linecap="round" /></g>',
-                generateSVGCurveCircle(overRange)
+                '" stroke="rgba(255,255,255,1)" fill="none" stroke-linecap="round" /></g>'
             )
         );
-    }
-
-    function generateSVGCurveCircle(int8 overRange)
-        internal
-        pure
-        returns (string memory svg)
-    {
-        string memory curvex1 = '73';
-        string memory curvey1 = '190';
-        string memory curvex2 = '217';
-        string memory curvey2 = '334';
-        if (overRange == 1 || overRange == -1) {
-            svg = string(
-                abi.encodePacked(
-                    '<circle cx="',
-                    overRange == -1 ? curvex1 : curvex2,
-                    'px" cy="',
-                    overRange == -1 ? curvey1 : curvey2,
-                    'px" r="4px" fill="white" /><circle cx="',
-                    overRange == -1 ? curvex1 : curvex2,
-                    'px" cy="',
-                    overRange == -1 ? curvey1 : curvey2,
-                    'px" r="24px" fill="none" stroke="white" />'
-                )
-            );
-        } else {
-            svg = string(
-                abi.encodePacked(
-                    '<circle cx="',
-                    curvex1,
-                    'px" cy="',
-                    curvey1,
-                    'px" r="4px" fill="white" />',
-                    '<circle cx="',
-                    curvex2,
-                    'px" cy="',
-                    curvey2,
-                    'px" r="4px" fill="white" />'
-                )
-            );
-        }
     }
 
     function generateSVGPositionDataAndLocationCurve(
@@ -333,13 +291,11 @@ contract Renderer {
                 '</text></g>'
                 '<g style="transform:translate(226px, 433px)">',
                 '<rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
-                '<path stroke-linecap="round" d="M8 9C8.00004 22.9494 16.2099 28 27 28" fill="none" stroke="white" />',
+                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)"> </tspan>',
+                '',
+                '</text>',
                 // here goes bottom left image
-                '<circle style="transform:translate3d(',
-                xCoord,
-                'px, ',
-                yCoord,
-                'px, 0px)" cx="0px" cy="0px" r="4px" fill="white"/></g>'
+                '</g>'
             )
         );
     }
