@@ -63,12 +63,12 @@ contract Renderer {
                     '1',
                     '1',
                     '1',
-                    'MY BORDER TEXT',
-                    'title',
-                    'subtitle',
-                    'attribute1',
-                    'attribute2',
-                    'attribute3'
+                    'XP: 0',
+                    'ENEAS',
+                    'Mystery',
+                    _tokenId.toString(),
+                    'Paper Hand',
+                    '0'
                 )
             );
     }
@@ -353,14 +353,14 @@ contract Renderer {
                 '<rect width="',
                 uint256(7 * (str2length + 4)).toString(),
                 'px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />',
-                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Min Tick: </tspan>',
+                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Team: </tspan>',
                 attribute2,
                 '</text></g>',
                 ' <g style="transform:translate(29px, 444px)">',
                 '<rect width="',
                 uint256(7 * (str3length + 4)).toString(),
                 'px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />',
-                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Max Tick: </tspan>',
+                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Coins: </tspan>',
                 attribute3,
                 '</text></g>'
                 '<g style="transform:translate(226px, 433px)">',
