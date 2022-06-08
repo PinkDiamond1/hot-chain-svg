@@ -265,7 +265,6 @@ contract Renderer {
         uint256 str1length = bytes(attribute1).length + 4;
         uint256 str2length = bytes(attribute2).length + 10;
         uint256 str3length = bytes(attribute3).length + 10;
-        (string memory xCoord, string memory yCoord) = rangeLocation(1, 2);
         svg = string(
             abi.encodePacked(
                 ' <g style="transform:translate(29px, 384px)">',
@@ -291,46 +290,13 @@ contract Renderer {
                 '</text></g>'
                 '<g style="transform:translate(226px, 433px)">',
                 '<rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
-                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)"> </tspan>',
-                '',
+                '<text x="7px" y="21px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)"> </tspan>',
+                '123',
                 '</text>',
                 // here goes bottom left image
                 '</g>'
             )
         );
-    }
-
-    function tickToString(int24 tick) private pure returns (string memory) {
-        return '555';
-    }
-
-    function rangeLocation(int24 tickLower, int24 tickUpper)
-        internal
-        pure
-        returns (string memory, string memory)
-    {
-        int24 midPoint = (tickLower + tickUpper) / 2;
-        if (midPoint < -125_000) {
-            return ('8', '7');
-        } else if (midPoint < -75_000) {
-            return ('8', '10.5');
-        } else if (midPoint < -25_000) {
-            return ('8', '14.25');
-        } else if (midPoint < -5_000) {
-            return ('10', '18');
-        } else if (midPoint < 0) {
-            return ('11', '21');
-        } else if (midPoint < 5_000) {
-            return ('13', '23');
-        } else if (midPoint < 25_000) {
-            return ('15', '25');
-        } else if (midPoint < 75_000) {
-            return ('18', '26');
-        } else if (midPoint < 125_000) {
-            return ('21', '27');
-        } else {
-            return ('24', '27');
-        }
     }
 
     function example() external pure returns (string memory) {
