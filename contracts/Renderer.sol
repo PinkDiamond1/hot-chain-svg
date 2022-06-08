@@ -83,7 +83,7 @@ contract Renderer {
                     generateSVGDefs(params),
                     generateSVGBorderText(params.bordertext),
                     generateSVGCardMantle(params.title, params.subtitle),
-                    generageSvgCurve(1, 2, 1, 2),
+                    generageSvgCurve(),
                     generateSVGPositionDataAndLocationCurve(
                         params.attribute1,
                         params.attribute2,
@@ -224,15 +224,9 @@ contract Renderer {
         );
     }
 
-    function generageSvgCurve(
-        int24 tickLower,
-        int24 tickUpper,
-        int24 tickSpacing,
-        int8 overRange
-    ) private pure returns (string memory svg) {
-        string memory fade = overRange == 1 ? '#fade-up' : overRange == -1
-            ? '#fade-down'
-            : '#none';
+    function generageSvgCurve() private pure returns (string memory svg) {
+        string memory fade = '#none';
+
         string memory curve = 'M1 1C41 41 105 105 145 145';
 
         svg = string(
