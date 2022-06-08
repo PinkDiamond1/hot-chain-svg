@@ -44,6 +44,9 @@ contract Renderer {
         string bordertext;
         string title;
         string subtitle;
+        string attribute1;
+        string attribute2;
+        string attribute3;
     }
 
     function render(uint256 _tokenId) public pure returns (string memory) {
@@ -83,7 +86,10 @@ color1 = "0096FF";
                     '1',
                     "MY BORDER TEXT",
                     "title",
-                    "subtitle"
+                    "subtitle",
+                    "attribute1",
+                    "attribute2",
+                    "attribute3"
                 )
             );
     }
@@ -117,9 +123,9 @@ color1 = "0096FF";
                         params.overRange
                     ),
                     generateSVGPositionDataAndLocationCurve(
-                        params.tokenId.toString(),
-                        params.tickLower,
-                        params.tickUpper
+                        params.attribute1,
+                        params.attribute2,
+                        params.attribute3
                     ),
                     generateSVGRareSparkle(params.tokenId, params.poolAddress),
                     '</svg>'
@@ -245,7 +251,7 @@ color1 = "0096FF";
         svg = string(
             abi.encodePacked(
                 '<g mask="url(#fade-symbol)"><rect fill="none" x="0px" y="0px" width="290px" height="200px" /> <text y="70px" x="32px" fill="white" font-family="\'Courier New\', monospace" font-weight="200" font-size="36px">',
-               title
+               title,
                 '</text><text y="115px" x="32px" fill="white" font-family="\'Courier New\', monospace" font-weight="200" font-size="36px">',
                 subtitle,
                 '</text></g>',
@@ -354,18 +360,17 @@ color1 = "0096FF";
     }
 
     function generateSVGPositionDataAndLocationCurve(
-        string memory tokenId,
-        int24 tickLower,
-        int24 tickUpper
+        string memory attribute1,
+        string memory attribute2,
+       string memory attribute3
     ) private pure returns (string memory svg) {
-        string memory tickLowerStr = tickToString(tickLower);
-        string memory tickUpperStr = tickToString(tickUpper);
-        uint256 str1length = bytes(tokenId).length + 4;
-        uint256 str2length = bytes(tickLowerStr).length + 10;
-        uint256 str3length = bytes(tickUpperStr).length + 10;
+
+        uint256 str1length = bytes(attribute1).length + 4;
+        uint256 str2length = bytes(attribute2).length + 10;
+        uint256 str3length = bytes(attribute3).length + 10;
         (string memory xCoord, string memory yCoord) = rangeLocation(
-            tickLower,
-            tickUpper
+            1,
+            2
         );
         svg = string(
             abi.encodePacked(
@@ -374,21 +379,21 @@ color1 = "0096FF";
                 uint256(7 * (str1length + 4)).toString(),
                 'px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />',
                 '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">ID: </tspan>',
-                tokenId,
+                attribute1,
                 '</text></g>',
                 ' <g style="transform:translate(29px, 414px)">',
                 '<rect width="',
                 uint256(7 * (str2length + 4)).toString(),
                 'px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />',
                 '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Min Tick: </tspan>',
-                tickLowerStr,
+                attribute2,
                 '</text></g>',
                 ' <g style="transform:translate(29px, 444px)">',
                 '<rect width="',
                 uint256(7 * (str3length + 4)).toString(),
                 'px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />',
                 '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Max Tick: </tspan>',
-                tickUpperStr,
+                attribute3,
                 '</text></g>'
                 '<g style="transform:translate(226px, 433px)">',
                 '<rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
