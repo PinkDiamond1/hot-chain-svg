@@ -41,13 +41,26 @@ contract Renderer {
         string y2;
         string x3;
         string y3;
+        string bordertext;
+        string title;
+        string subtitle;
     }
 
     function render(uint256 _tokenId) public pure returns (string memory) {
+        uint256 team = 0;
+        string memory color1 = 'CC5500';
+        string memory color2 = '448844';
+        string memory color3 = '448844';
+        string memory color4 = '448844';
+        if (team == 0) {
+color1 = "0096FF";
+        }
+        
+
         return
             generateSVG(
                 SVGParams(
-                    'ETH',
+                    'QUOTE',
                     'ETH',
                     0x656c66F1C4be734Bd14163Bbe001d379121478ca,
                     'ETH',
@@ -58,16 +71,19 @@ contract Renderer {
                     1,
                     1,
                     1,
-                    'red',
-                    'red',
-                    'red',
-                    'red',
+                    color1,
+                    color2,
+                    color3,
+                    color4,
                     '1',
                     '1',
                     '1',
                     '1',
                     '1',
-                    '1'
+                    '1',
+                    "MY BORDER TEXT",
+                    "title",
+                    "subtitle"
                 )
             );
     }
@@ -88,15 +104,11 @@ contract Renderer {
                 abi.encodePacked(
                     generateSVGDefs(params),
                     generateSVGBorderText(
-                        params.quoteToken,
-                        params.baseToken,
-                        params.quoteTokenSymbol,
-                        params.baseTokenSymbol
+                        params.bordertext
                     ),
                     generateSVGCardMantle(
-                        params.quoteTokenSymbol,
-                        params.baseTokenSymbol,
-                        params.feeTier
+                        params.title,
+                        params.subtitle
                     ),
                     generageSvgCurve(
                         params.tickLower,
@@ -205,51 +217,37 @@ contract Renderer {
     }
 
     function generateSVGBorderText(
-        string memory quoteToken,
-        string memory baseToken,
-        string memory quoteTokenSymbol,
-        string memory baseTokenSymbol
+        string memory text
     ) private pure returns (string memory svg) {
         svg = string(
             abi.encodePacked(
                 '<text text-rendering="optimizeSpeed">',
                 '<textPath startOffset="-100%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-                baseToken,
-                unicode' • ',
-                baseTokenSymbol,
+               text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" />',
                 '</textPath> <textPath startOffset="0%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-                baseToken,
-                unicode' • ',
-                baseTokenSymbol,
+               text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" /> </textPath>',
                 '<textPath startOffset="50%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-                quoteToken,
-                unicode' • ',
-                quoteTokenSymbol,
+               text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s"',
                 ' repeatCount="indefinite" /></textPath><textPath startOffset="-50%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-                quoteToken,
-                unicode' • ',
-                quoteTokenSymbol,
+              text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" /></textPath></text>'
             )
         );
     }
 
     function generateSVGCardMantle(
-        string memory quoteTokenSymbol,
-        string memory baseTokenSymbol,
-        string memory feeTier
+        string memory title,
+        string memory subtitle
     ) private pure returns (string memory svg) {
         svg = string(
             abi.encodePacked(
                 '<g mask="url(#fade-symbol)"><rect fill="none" x="0px" y="0px" width="290px" height="200px" /> <text y="70px" x="32px" fill="white" font-family="\'Courier New\', monospace" font-weight="200" font-size="36px">',
-                quoteTokenSymbol,
-                '/',
-                baseTokenSymbol,
+               title
                 '</text><text y="115px" x="32px" fill="white" font-family="\'Courier New\', monospace" font-weight="200" font-size="36px">',
-                feeTier,
+                subtitle,
                 '</text></g>',
                 '<rect x="16" y="16" width="258" height="468" rx="26" ry="26" fill="rgba(0,0,0,0)" stroke="rgba(255,255,255,0.2)" />'
             )
@@ -405,7 +403,7 @@ contract Renderer {
     }
 
     function tickToString(int24 tick) private pure returns (string memory) {
-       return "555";
+        return '555';
     }
 
     function rangeLocation(int24 tickLower, int24 tickUpper)
