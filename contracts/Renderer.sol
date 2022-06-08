@@ -6,8 +6,8 @@ pragma solidity ^0.8.11;
 import '@openzeppelin/contracts/utils/Strings.sol';
 import 'base64-sol/base64.sol';
 
-import './SVG.sol';
-import './Utils.sol';
+// import './SVG.sol';
+// import './Utils.sol';
 
 contract Renderer {
     using Strings for uint256;
@@ -18,12 +18,6 @@ contract Renderer {
         string color1;
         string color2;
         string color3;
-        string x1;
-        string y1;
-        string x2;
-        string y2;
-        string x3;
-        string y3;
         string bordertext;
         string title;
         string subtitle;
@@ -55,12 +49,6 @@ contract Renderer {
                     color2,
                     color3,
                     color4,
-                    '1',
-                    '1',
-                    '1',
-                    '1',
-                    '1',
-                    '1',
                     'XP: 0',
                     'ENEAS',
                     'Mystery',
@@ -124,9 +112,9 @@ contract Renderer {
                     bytes(
                         abi.encodePacked(
                             "<svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'><circle cx='",
-                            params.x1,
+                            '1',
                             "' cy='",
-                            params.y1,
+                            '1',
                             "' r='120px' fill='#",
                             params.color1,
                             "'/></svg>"
@@ -138,9 +126,9 @@ contract Renderer {
                     bytes(
                         abi.encodePacked(
                             "<svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'><circle cx='",
-                            params.x2,
+                            '1',
                             "' cy='",
-                            params.y2,
+                            '1',
                             "' r='120px' fill='#",
                             params.color2,
                             "'/></svg>"
@@ -153,9 +141,9 @@ contract Renderer {
                     bytes(
                         abi.encodePacked(
                             "<svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'><circle cx='",
-                            params.x3,
+                            '1',
                             "' cy='",
-                            params.y3,
+                            '1',
                             "' r='100px' fill='#",
                             params.color3,
                             "'/></svg>"
@@ -292,7 +280,7 @@ contract Renderer {
                 '<g style="transform:translate(226px, 433px)">',
                 '<rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />',
                 '<text x="7px" y="21px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)"> </tspan>',
-                '\xf0\x9f\x99\x83',
+                '123',
                 '</text>',
                 // here goes bottom left image
                 '</g>'
