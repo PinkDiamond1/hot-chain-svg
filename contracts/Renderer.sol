@@ -28,7 +28,8 @@ contract Renderer {
 
     function render(uint256 _tokenId) public pure returns (string memory) {
         // don't forget to query team
-        uint256 team = 0;
+        uint256 team = 1;
+        string memory house = 'Mileah Castle';
 
         string memory color1 = 'CC5500';
         string memory color2 = 'CC5500';
@@ -38,6 +39,7 @@ contract Renderer {
         if (team == 0) {
             color1 = '0096FF';
         } else {
+            house = 'Hahyrst Tower';
             color1 = 'CC5500';
         }
 
@@ -53,7 +55,7 @@ contract Renderer {
                     'ENEAS', //title
                     'Mystery', //subtitle
                     _tokenId.toString(), //attr1
-                    'Paper Hand', //attr 2
+                    house, //attr 2
                     '0' //attr3
                 )
             );
@@ -267,7 +269,7 @@ contract Renderer {
                 '<rect width="',
                 uint256(7 * (str2length + 4)).toString(),
                 'px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />',
-                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">Team: </tspan>',
+                '<text x="12px" y="17px" font-family="\'Courier New\', monospace" font-size="12px" fill="white"><tspan fill="rgba(255,255,255,0.6)">House: </tspan>',
                 attribute2,
                 '</text></g>',
                 ' <g style="transform:translate(29px, 444px)">',
@@ -300,3 +302,7 @@ contract Renderer {
         );
     }
 }
+
+// Mileah Castle: This large walled castle sits at the top of a rocky hill. The female lord of the castle is a woman named Arteshki, and it is inhabited by a large entourage of servants.
+
+// Hahyrst Tower: This large walled castle sits upon the banks of a river, spanned by a drawbridge. It is in disrepair, and totally deserted.
