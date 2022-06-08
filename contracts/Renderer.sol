@@ -24,7 +24,7 @@ contract Renderer {
                     ),
                     utils.NULL
                 ),
-                 svg.rect(
+                svg.rect(
                     string.concat(
                         svg.prop('fill', 'url(#s)'),
                         svg.prop('x', '10'),
@@ -49,18 +49,34 @@ contract Renderer {
                 svg.text(
                     string.concat(
                         svg.prop('x', '20'),
-                        svg.prop('y', '40'),
-                        svg.prop('font-size', '22'),
+                        svg.prop('y', '80%'),
+                        svg.prop('font-size', '40px'),
                         svg.prop('fill', 'white')
                     ),
                     string.concat(
-                        svg.cdata('Hello, tokensss #'),
+                        svg.cdata('Token #'),
                         utils.uint2str(_tokenId)
                     )
                 ),
-                 string.concat(' <path id="path" d="M30 30 L970 30 L970 970 L30 970Z" fill="transparent"/><text text-anchor="middle"><textPath font-size="25px" class="my-text" href="#path" startOffset="0%"><animate attributeName="startOffset" from="0%" to="100%" dur="20s" repeatCount="indefinite"></animate>',
-                 '0x47457547854367543785468754684537654387' //address of owner
-                 ,'</textPath></text>'),
+                svg.text(
+                    string.concat(
+                        svg.prop('x', '20'),
+                        svg.prop('y', '85%'),
+                        svg.prop('font-size', '40px'),
+                        svg.prop('fill', 'white')
+                    ),
+                    string.concat(svg.cdata('Team: '), 'PAPER HANDS')
+                ),
+                string.concat(
+                    ' <path id="path" d="M30 30 L970 30 L970 970 L30 970Z" fill="transparent"/><text text-anchor="middle"><textPath font-size="25px" class="my-text" href="#path" startOffset="0%"><animate attributeName="startOffset" from="0%" to="100%" dur="20s" repeatCount="indefinite"></animate>',
+                    'SCORE = 0', //address of owner
+                    '</textPath></text>'
+                ),
+                string.concat(
+                    ' <path id="path" d="M30 30 L970 30 L970 970 L30 970Z" fill="transparent"/><text text-anchor="middle"><textPath font-size="25px" class="my-text" href="#path" startOffset="0%"><animate attributeName="startOffset" from="0%" to="100%" dur="20s" repeatCount="indefinite"></animate>',
+                    'SCORE = 0', //address of owner
+                    '</textPath></text>'
+                ),
                 '</svg>'
             );
     }
