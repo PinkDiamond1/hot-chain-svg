@@ -46,14 +46,13 @@ contract Renderer {
         string memory color3 = 'CC5500';
         string memory color4 = 'CC5500';
         if (team == 0) {
-color1 = "0096FF";
+            color1 = '0096FF';
         }
-        
 
         return
             generateSVG(
                 SVGParams(
-                    1,
+                    _tokenId,
                     color1,
                     color2,
                     color3,
@@ -64,12 +63,12 @@ color1 = "0096FF";
                     '1',
                     '1',
                     '1',
-                    "MY BORDER TEXT",
-                    "title",
-                    "subtitle",
-                    "attribute1",
-                    "attribute2",
-                    "attribute3"
+                    'MY BORDER TEXT',
+                    'title',
+                    'subtitle',
+                    'attribute1',
+                    'attribute2',
+                    'attribute3'
                 )
             );
     }
@@ -89,19 +88,9 @@ color1 = "0096FF";
             string(
                 abi.encodePacked(
                     generateSVGDefs(params),
-                    generateSVGBorderText(
-                        params.bordertext
-                    ),
-                    generateSVGCardMantle(
-                        params.title,
-                        params.subtitle
-                    ),
-                    generageSvgCurve(
-                        1,
-                       2,
-                        1,
-                        2
-                    ),
+                    generateSVGBorderText(params.bordertext),
+                    generateSVGCardMantle(params.title, params.subtitle),
+                    generageSvgCurve(1, 2, 1, 2),
                     generateSVGPositionDataAndLocationCurve(
                         params.attribute1,
                         params.attribute2,
@@ -202,36 +191,39 @@ color1 = "0096FF";
         );
     }
 
-    function generateSVGBorderText(
-        string memory text
-    ) private pure returns (string memory svg) {
+    function generateSVGBorderText(string memory text)
+        private
+        pure
+        returns (string memory svg)
+    {
         svg = string(
             abi.encodePacked(
                 '<text text-rendering="optimizeSpeed">',
                 '<textPath startOffset="-100%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-               text,
+                text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" />',
                 '</textPath> <textPath startOffset="0%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-               text,
+                text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" /> </textPath>',
                 '<textPath startOffset="50%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-               text,
+                text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s"',
                 ' repeatCount="indefinite" /></textPath><textPath startOffset="-50%" fill="white" font-family="\'Courier New\', monospace" font-size="10px" xlink:href="#text-path-a">',
-              text,
+                text,
                 ' <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" /></textPath></text>'
             )
         );
     }
 
-    function generateSVGCardMantle(
-        string memory title,
-        string memory subtitle
-    ) private pure returns (string memory svg) {
+    function generateSVGCardMantle(string memory title, string memory subtitle)
+        private
+        pure
+        returns (string memory svg)
+    {
         svg = string(
             abi.encodePacked(
                 '<g mask="url(#fade-symbol)"><rect fill="none" x="0px" y="0px" width="290px" height="200px" /> <text y="70px" x="32px" fill="white" font-family="\'Courier New\', monospace" font-weight="200" font-size="36px">',
-               title,
+                title,
                 '</text><text y="115px" x="32px" fill="white" font-family="\'Courier New\', monospace" font-weight="200" font-size="36px">',
                 subtitle,
                 '</text></g>',
@@ -342,16 +334,12 @@ color1 = "0096FF";
     function generateSVGPositionDataAndLocationCurve(
         string memory attribute1,
         string memory attribute2,
-       string memory attribute3
+        string memory attribute3
     ) private pure returns (string memory svg) {
-
         uint256 str1length = bytes(attribute1).length + 4;
         uint256 str2length = bytes(attribute2).length + 10;
         uint256 str3length = bytes(attribute3).length + 10;
-        (string memory xCoord, string memory yCoord) = rangeLocation(
-            1,
-            2
-        );
+        (string memory xCoord, string memory yCoord) = rangeLocation(1, 2);
         svg = string(
             abi.encodePacked(
                 ' <g style="transform:translate(29px, 384px)">',
@@ -439,8 +427,6 @@ color1 = "0096FF";
             svg = '';
         }
     }
-
-    
 
     function example() external pure returns (string memory) {
         return render(1);
